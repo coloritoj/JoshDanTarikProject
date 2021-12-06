@@ -154,9 +154,7 @@ namespace JoshDanTarikProject
 
                 } while (goAgain == true);
                
-            }
-
-
+            } 
         }
     }
 }
