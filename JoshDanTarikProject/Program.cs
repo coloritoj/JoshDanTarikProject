@@ -42,10 +42,12 @@ namespace JoshDanTarikProject
             testList.Add(new Book("Fahrenheit 451", "Ray Bradbury", "Checked-Out", 12.06));
             testList.Add(new Book("Jane Eyre", "Charlotte Bronte", "Checked-Out", 12.06));
             testList.Add(new Book("Wuthering Heights", "Emily Bronte", "Checked-Out", 12.06));
-            testList.Add(new Book("Brave New World", "Aldous Huxley", "Checked-Out", 12.06));
+            testList.Add(new Book("Brave New World", "Aldous Huxley", "Available", 12.06));
 
             Console.Write("Welcome to our library! What would you like to do? \n(LIST BOOKS/SEARCH BY AUTHOR/SEARCH BY TITLE KEYWORD/CHECK-OUT/RETURN BOOK): ");
             string userEntry = Console.ReadLine();
+            bool goAgain = true;
+            int bookSelection = 0;
 
             if (userEntry == "list books")
             {
@@ -84,11 +86,74 @@ namespace JoshDanTarikProject
             {
                 for (int i = 0; i < testList.Count; i++)
                 {
-                    Console.WriteLine($"{i + 1} - {testList[i].Title} - {testList[i].Author}");
+                    Console.WriteLine($"{i + 1} - {testList[i].Title} - {testList[i].Author} - {testList[i].Status}");
                 }
 
-                Console.Write("\nWhich book would you like to check-out?: ");
-                
+                do
+                {
+                    Console.Write("\nWhich book would you like to check-out?: ");
+                    bookSelection = int.Parse(Console.ReadLine());
+                    if (testList[bookSelection - 1].Status == "Checked-Out")
+                    {
+                        Console.WriteLine("Sorry, that book is already checked-out.");
+
+                        Console.Write("\nWould you like to attempt to check-out another book? (yes/no): ");
+                        userEntry = Console.ReadLine();
+
+                        if (userEntry == "no")
+                        {
+                            goAgain = false;
+                        }
+
+                    }
+                    else if (testList[bookSelection - 1].Status == "Available")
+                    {
+                        testList[bookSelection - 1].Status = "Checked-Out";
+                        testList[bookSelection - 1].DueDate = 12.25;
+                        Console.WriteLine($"Thanks for checking-out {testList[bookSelection - 1].Title}! It is due on {testList[bookSelection - 1].DueDate}.");
+                    }
+
+                    Console.Write("\nWould you like to attempt to check-out another book? (yes/no): ");
+                    userEntry = Console.ReadLine();
+
+                    if (userEntry == "no")
+                    {
+                        goAgain = false;
+                    }
+
+                } while (goAgain == true);
+
+            }
+            else if (userEntry == "return book")
+            {
+                do
+                {
+                    Console.WriteLine("Here are the books currently checked out:");
+
+                    for (int i = 0; i < testList.Count; i++)
+                    {
+                        if (testList[i].Status == "Checked-Out")
+                        {
+                            Console.WriteLine($"{i + 1} - {testList[i].Title} - {testList[i].Author} - {testList[i].Status}");
+                        }
+                    }
+
+                    Console.Write("\nWhich book would you like to return? Please enter the corresponding number: ");
+                    bookSelection = int.Parse(Console.ReadLine());
+
+                    testList[bookSelection - 1].Status = "Available";
+                    Console.WriteLine($"Thank you for checking-in {testList[bookSelection - 1].Title}!");
+
+                    Console.Write("\nWould you like to return another book? (yes/no): ");
+                    userEntry = Console.ReadLine();
+
+                    if (userEntry == "no")
+                    {
+                        goAgain = false;
+                    }
+
+                } while (goAgain == true);
+               
             }
 
 
