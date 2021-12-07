@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace JoshDanTarikProject
 {
@@ -53,6 +54,59 @@ namespace JoshDanTarikProject
             }
         }
 
+        static bool isValidBook(string entry, List<Book> bookList)
+        {
+            foreach (Book book in bookList)
+            {
+                if (book.Title.Contains(entry))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        static bool isValidAuthor(string entry, List<Book> bookList)
+        {
+            foreach (Book book in bookList)
+            {
+                if (book.Author.Contains(entry))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
+        static int ReadInt()
+        {
+            bool done = false;
+            int result = 0;
+            while (!done)
+            {
+                string entry = Console.ReadLine();
+                try
+                {
+                    Console.WriteLine("Time to call parse");
+                    result = int.Parse(entry);
+                    done = true;
+                    Console.WriteLine("Everything looks good, setting done to true");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Sorry, that isn't an integer.  Please try again.");
+                }
+                Console.WriteLine("last line of the loop");
+            }
+            return result;
+        }
+
+
+
+
+
 
         static void Main(string[] args)
         {
@@ -64,15 +118,15 @@ namespace JoshDanTarikProject
 
             Book testbook = new Book("Dune", "Frank Herbert", "Checked-Out");
             testList.Add(testbook);
-            testList.Add(new Book("Harry Potter & The Sorceror's Stone", "J.K. Rowling", "Checked-Out"));
+            testList.Add(new Book("Harry Potter & The Sorceror's Stone", "J.K. Rowling", "Available"));
             testList.Add(new Book("To Kill a Mockingbird", "Harper Lee", "Checked-Out"));
             testList.Add(new Book("1984", "George Orwell", "Checked-Out"));
-            testList.Add(new Book("The Great Gatsby", "F. Scott Fitzgerald", "Checked-Out"));
+            testList.Add(new Book("The Great Gatsby", "F. Scott Fitzgerald", "Available"));
             testList.Add(new Book("The Catcher and The Rye", "J.D. Salinger", "Checked-Out"));
-            testList.Add(new Book("Little Women", "Louisa May Alcott", "Checked-Out"));
-            testList.Add(new Book("Lord of the Flies", "William Golding", "Checked-Out"));
+            testList.Add(new Book("Little Women", "Louisa May Alcott", "Available"));
+            testList.Add(new Book("Lord of the Flies", "William Golding", "Available"));
             testList.Add(new Book("Fahrenheit 451", "Ray Bradbury", "Checked-Out"));
-            testList.Add(new Book("Jane Eyre", "Charlotte Bronte", "Checked-Out"));
+            testList.Add(new Book("Jane Eyre", "Charlotte Bronte", "Available"));
             testList.Add(new Book("Wuthering Heights", "Emily Bronte", "Checked-Out"));
             testList.Add(new Book("Brave New World", "Aldous Huxley", "Available"));
 
@@ -107,11 +161,17 @@ namespace JoshDanTarikProject
                     Console.Write("\nPlease enter the name of the author: ");
                     userEntry = Console.ReadLine();
 
+                    while (isValidAuthor(userEntry, testList) == false)
+                    {
+                        Console.WriteLine("Sorry, we do not have a book that matches your search. Please try again: ");
+                        userEntry = Console.ReadLine();
+                    }
+
                     foreach (Book book in testList)
                     {
                         if (book.Author.Contains(userEntry))
                         {
-                            Console.WriteLine(book.Title);
+                            Console.WriteLine($"{book.Title} by {book.Author} - {book.Status}");
                         }
                     }
                 }
@@ -120,11 +180,17 @@ namespace JoshDanTarikProject
                     Console.Write("\nPlease enter the name of the book: ");
                     userEntry = Console.ReadLine();
 
+                    while (isValidBook(userEntry, testList) == false)
+                    {
+                        Console.WriteLine("Sorry, we do not have a book that matches your search. Please try again: ");
+                        userEntry = Console.ReadLine();
+                    }
+
                     foreach (Book book in testList)
                     {
                         if (book.Title.Contains(userEntry))
                         {
-                            Console.WriteLine(book.Title);
+                            Console.WriteLine($"{book.Title} by {book.Author} - {book.Status}");
                         }
                     }
                 }
@@ -137,8 +203,12 @@ namespace JoshDanTarikProject
 
                     do
                     {
-                        Console.Write("\nWhich book would you like to check-out?: ");
+                        Console.Write("\nPlease enter the number of the book you would like to check-out: ");
                         bookSelection = int.Parse(Console.ReadLine());
+
+
+
+
                         if (testList[bookSelection - 1].Status == "Checked-Out")
                         {
                             Console.WriteLine("Sorry, that book is already checked-out.");
@@ -191,7 +261,7 @@ namespace JoshDanTarikProject
 
                     } while (goAgain == true);
                 }
-                Console.Write("Would you like to go back to the menu? (yes/no): ");
+                Console.Write("\nWould you like to go back to the menu? (yes/no): ");
                 userEntry = Console.ReadLine().ToLower();
 
                 if (userEntry == "no")
@@ -203,3 +273,5 @@ namespace JoshDanTarikProject
         }
     }
 }
+
+
