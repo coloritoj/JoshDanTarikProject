@@ -89,24 +89,16 @@ namespace JoshDanTarikProject
                 string entry = Console.ReadLine();
                 try
                 {
-                    Console.WriteLine("Time to call parse");
                     result = int.Parse(entry);
                     done = true;
-                    Console.WriteLine("Everything looks good, setting done to true");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Sorry, that isn't an integer.  Please try again.");
+                    Console.Write("\nSorry, that isn't a valid book number. Please try again: ");
                 }
-                Console.WriteLine("last line of the loop");
             }
             return result;
         }
-
-
-
-
-
 
         static void Main(string[] args)
         {
@@ -134,7 +126,7 @@ namespace JoshDanTarikProject
 
             Console.WriteLine("Welcome to our library!");
 
-
+            
             do
             {
                 Console.Write("What would you like to do? \n(LIST BOOKS/SEARCH BY AUTHOR/SEARCH BY TITLE/CHECK-OUT/RETURN BOOK): ");
@@ -204,10 +196,21 @@ namespace JoshDanTarikProject
                     do
                     {
                         Console.Write("\nPlease enter the number of the book you would like to check-out: ");
-                        bookSelection = int.Parse(Console.ReadLine());
+                        bookSelection = ReadInt();
 
-
-
+                        bool myBool = false;
+                        while (myBool == false)
+                        {
+                            if (bookSelection - 1 <= testList.Count)
+                            {
+                                myBool = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Sorry, that wasn't a valid entry. Please enter the number of the book you would like to check-out: ");
+                                bookSelection = ReadInt();
+                            }
+                        }
 
                         if (testList[bookSelection - 1].Status == "Checked-Out")
                         {
@@ -218,7 +221,7 @@ namespace JoshDanTarikProject
                             testList[bookSelection - 1].Status = "Checked-Out";
                             testList[bookSelection - 1].DueDate = dueDateTime;
                             Console.WriteLine($"Thanks for checking-out {testList[bookSelection - 1].Title}! It is due on {testList[bookSelection - 1].DueDate}.");
-                        }
+                        }                        
 
                         Console.Write("\nWould you like to attempt to check-out another book? (yes/no): ");
                         userEntry = Console.ReadLine();
@@ -246,7 +249,20 @@ namespace JoshDanTarikProject
                         }
 
                         Console.Write("\nWhich book would you like to return? Please enter the corresponding number: ");
-                        bookSelection = int.Parse(Console.ReadLine());
+                        bookSelection = ReadInt();
+                        bool myBool = false;
+                        while (myBool == false)
+                        {
+                            if (bookSelection - 1 <= testList.Count)
+                            {
+                                myBool = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Sorry, that wasn't a valid entry. Please enter the number of the book you would like to check-out: ");
+                                bookSelection = ReadInt();
+                            }
+                        }
 
                         testList[bookSelection - 1].Status = "Available";
                         Console.WriteLine($"Thank you for checking-in {testList[bookSelection - 1].Title}!");
