@@ -78,8 +78,6 @@ namespace JoshDanTarikProject
             return false;
         }
 
-
-
         static int ReadInt()
         {
             bool done = false;
@@ -110,9 +108,17 @@ namespace JoshDanTarikProject
 
             Book testbook = new Book("Dune", "Frank Herbert", "Checked-Out");
             testList.Add(testbook);
-            testList.Add(new Book("Harry Potter & The Sorceror's Stone", "J.K. Rowling", "Available"));
+            testList.Add(new Book("Harry Potter & The Sorcerer's Stone", "J.K. Rowling", "Available"));
+            testList.Add(new Book("Harry Potter & The Chamber of Secrets", "J.K. Rowling", "Available"));
+            testList.Add(new Book("Harry Potter & The Prisoner of Azkaban", "J.K. Rowling", "Available"));
+            testList.Add(new Book("Harry Potter & The Goblet of Fire", "J.K. Rowling", "Available"));
+            testList.Add(new Book("Harry Potter & The Order of The Phoenix", "J.K. Rowling", "Available"));
+            testList.Add(new Book("Harry Potter & The Half Blood Prince", "J.K. Rowling", "Available"));
+            testList.Add(new Book("Harry Potter & The Deathly Hallows", "J.K. Rowling", "Checked-Out"));
             testList.Add(new Book("To Kill a Mockingbird", "Harper Lee", "Checked-Out"));
             testList.Add(new Book("1984", "George Orwell", "Checked-Out"));
+            testList.Add(new Book("Animal Farm", "George Orwell", "Available"));
+            testList.Add(new Book("Down and Out in Paris and London", "George Orwell", "Available"));
             testList.Add(new Book("The Great Gatsby", "F. Scott Fitzgerald", "Available"));
             testList.Add(new Book("The Catcher and The Rye", "J.D. Salinger", "Checked-Out"));
             testList.Add(new Book("Little Women", "Louisa May Alcott", "Available"));
@@ -123,10 +129,8 @@ namespace JoshDanTarikProject
             testList.Add(new Book("Brave New World", "Aldous Huxley", "Available"));
 
             bool goAgain2 = true;
-
             Console.WriteLine("Welcome to our library!");
-
-            
+                        
             do
             {
                 Console.Write("What would you like to do? \n(LIST BOOKS/SEARCH BY AUTHOR/SEARCH BY TITLE/CHECK-OUT/RETURN BOOK): ");
