@@ -133,7 +133,7 @@ namespace JoshDanTarikProject
                         
             do
             {
-                Console.Write("What would you like to do? \n(LIST BOOKS/SEARCH BY AUTHOR/SEARCH BY TITLE/CHECK-OUT/RETURN BOOK): ");
+                Console.Write("What would you like to do? \n(LIST BOOKS / SEARCH BY AUTHOR / SEARCH BY TITLE / CHECK-OUT / RETURN BOOK): ");
                 string userEntry = Console.ReadLine().ToLower();
                 bool goAgain = true;
                 int bookSelection = 0;
@@ -263,13 +263,13 @@ namespace JoshDanTarikProject
                             }
                             else
                             {
-                                Console.WriteLine("Sorry, that wasn't a valid entry. Please enter the number of the book you would like to check-out: ");
+                                Console.Write("Sorry, that wasn't a valid entry. Please enter the number of the book you would like to return: ");
                                 bookSelection = ReadInt();
                             }
                         }
 
                         testList[bookSelection - 1].Status = "Available";
-                        Console.WriteLine($"Thank you for checking-in {testList[bookSelection - 1].Title}!");
+                        Console.WriteLine($"Thank you for returning {testList[bookSelection - 1].Title}!");
 
                         Console.Write("\nWould you like to return another book? (yes/no): ");
                         userEntry = Console.ReadLine();
