@@ -145,14 +145,14 @@ namespace JoshDanTarikProject
                     isValidCommand(userEntry);
                 }
 
-                if (userEntry == "list books")
+                if (userEntry == "list books") // LIST BOOKS
                 {
                     foreach (Book book in testList)
                     {
                         Console.WriteLine(book);
                     }
                 }
-                else if (userEntry == "search by author")
+                else if (userEntry == "search by author") // SEARCH BY AUTHOR
                 {
                     Console.Write("\nPlease enter the name of the author: ");
                     userEntry = Console.ReadLine();
@@ -171,7 +171,7 @@ namespace JoshDanTarikProject
                         }
                     }
                 }
-                else if (userEntry == "search by title")
+                else if (userEntry == "search by title") // SEARCH BY TITLE
                 {
                     Console.Write("\nPlease enter the name of the book: ");
                     userEntry = Console.ReadLine();
@@ -190,7 +190,7 @@ namespace JoshDanTarikProject
                         }
                     }
                 }
-                else if (userEntry == "check-out")
+                else if (userEntry == "check-out") // CHECK-OUT
                 {
                     for (int i = 0; i < testList.Count; i++)
                     {
@@ -238,7 +238,7 @@ namespace JoshDanTarikProject
                     } while (goAgain == true);
 
                 }
-                else if (userEntry == "return book")
+                else if (userEntry == "return book") // RETURN BOOK
                 {
                     do
                     {
@@ -281,7 +281,7 @@ namespace JoshDanTarikProject
 
                     } while (goAgain == true);
                 }
-                Console.Write("\nWould you like to go back to the menu? (yes/no): ");
+                Console.Write("\nWould you like to go back to the menu? (yes/no): "); // LOOP BACK TO START
                 userEntry = Console.ReadLine().ToLower();
 
                 if (userEntry == "no")
